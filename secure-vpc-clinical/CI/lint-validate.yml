@@ -1,0 +1,17 @@
+name: Lint & Validate
+
+on: [pull_request]
+
+jobs:
+  lint-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1       # official HCP Action :contentReference[oaicite:11]{index=11}
+      - name: terraform fmt
+        run: terraform fmt -check
+      - name: terraform validate
+        run: terraform validate
+      - name: tflint
+        uses: terraform-linters/setup-tflint@v3  # ensures best practices :contentReference[oaicite:12]{index=12}

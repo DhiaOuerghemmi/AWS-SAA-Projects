@@ -1,0 +1,22 @@
+name: Terraform Plan
+
+on:
+  pull_request:
+    branches: [ dev ]
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+      - name: terraform init
+        run: terraform init -backend-config="workspace=dev"
+      - name: terraform plan
+        run: terraform plan -out plan.tfout
+      - name: Upload Plan
+        uses: actions/upload-artifact@v3
+        with:
+          name: tfplan
+          path: plan.tfout

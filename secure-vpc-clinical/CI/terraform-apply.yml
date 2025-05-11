@@ -1,0 +1,17 @@
+name: Terraform Apply
+
+on:
+  workflow_dispatch:
+
+jobs:
+  apply:
+    needs: plan
+    runs-on: ubuntu-latest
+    environment: production             # GitHub Environment with required reviewers :contentReference[oaicite:14]{index=14}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download Plan
+        uses: actions/download-artifact@v3
+        with: { name: tfplan, path: . }
+      - name: terraform apply
+        run: terraform apply -auto-approve plan.tfout
