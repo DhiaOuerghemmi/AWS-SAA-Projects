@@ -1,0 +1,7 @@
+{
+  "ConfigRuleName": "restricted-cidrs",
+  "Source": {
+    "Owner": "AWS",
+    "SourceIdentifier": "RESTRICTED_COMMON_PORTS"
+  }
+}

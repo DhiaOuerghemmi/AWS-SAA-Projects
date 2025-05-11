@@ -1,0 +1,11 @@
+import "tfplan/v2" as tfplan
+
+# Deny any security group opening 0.0.0.0/0 for SSH
+all_sg_rules = tfplan.module_vpc.security_groups
+
+deny_ssh_public = func(rule) {
+  rule.protocol is "tcp" and rule.from_port is 22 and
+  rule.cidr_blocks contains "0.0.0.0/0"
+}
+
+main = rule { not all_sg_rules.any(deny_ssh_public) }

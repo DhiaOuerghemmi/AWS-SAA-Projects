@@ -1,0 +1,10 @@
+{
+  "Version":"2012-10-17",
+  "Statement":[{
+    "Sid":"DenyUnauthorizedRegions",
+    "Effect":"Deny",
+    "Action":"*",
+    "Resource":"*",
+    "Condition":{"StringEquals":{"aws:RequestedRegion":["us-west-1","eu-west-3"]}}
+  }]
+}
